@@ -68,17 +68,17 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: config
-          {{- if and .Values.jellyfin.enabled .Values.jellyfin.persistence.media.enabled .Values.sonarr.persistence.enabled .Values.plex.persistence.enabled }}
+          {{- if and .Values.jellyfin.enabled .Values.jellyfin.persistence.media.enabled .Values.sonarr.enabled .Values.sonarr.persistence.enabled .Values.plex.persistence.enabled }}
             - mountPath: "/media/{{ .Values.sonarr.persistence.path }}"
               name: media
               subPath: {{ .Values.sonarr.persistence.path }}
           {{- end }}
-          {{- if and .Values.jellyfin.enabled .Values.jellyfin.persistence.media.enabled .Values.radarr.persistence.enabled .Values.plex.persistence.enabled }}
+          {{- if and .Values.jellyfin.enabled .Values.jellyfin.persistence.media.enabled .Values.radarr.enabled .Values.radarr.persistence.enabled .Values.plex.persistence.enabled }}
             - mountPath: "/media/{{ .Values.radarr.persistence.path }}"
               name: media
               subPath: {{ .Values.radarr.persistence.path }}
           {{- end }}
-          {{- if and .Values.jellyfin.enabled .Values.jellyfin.persistence.media.enabled .Values.lidarr.persistence.enabled .Values.plex.persistence.enabled }}
+          {{- if and .Values.jellyfin.enabled .Values.jellyfin.persistence.media.enabled .Values.lidarr.enabled .Values.lidarr.persistence.enabled .Values.plex.persistence.enabled }}
             - mountPath: "/media/{{ .Values.lidarr.persistence.path }}"
               name: media
               subPath: {{ .Values.lidarr.persistence.path }}

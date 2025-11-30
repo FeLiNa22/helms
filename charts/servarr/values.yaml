@@ -1515,7 +1515,7 @@ cleanuparr:
 ## @param sabnzbd.env.PGID The group ID to use for the pod.
 ## @param sabnzbd.env.TZ The timezone to use for the pod.
 ## @param sabnzbd.persistence.enabled Whether to enable persistence.
-## @param sabnzbd.persistence.path The path to use for the persistence. Don't use slashes. Uses jellyfin's media PVC.
+## @param sabnzbd.persistence.path The subdirectory path to use within jellyfin's media PVC (e.g., 'downloads'). No leading or trailing slashes.
 ## @param sabnzbd.persistence.storageClass The storage class to use for the persistence.
 ## @param sabnzbd.persistence.existingClaim The name of an existing claim to use for the persistence.
 ## @param sabnzbd.persistence.accessMode The access mode to use for the persistence.
