@@ -1,0 +1,19 @@
+apiVersion: v2
+name: postgresql-cluster
+description: A Helm chart for PostgreSQL using CloudNativePG operator with cluster scaling capabilities
+type: application
+version: 0.1.0
+appVersion: "16.6"
+keywords:
+  - postgresql
+  - postgres
+  - database
+  - cloudnativepg
+  - cnpg
+  - cluster
+  - high-availability
+home: https://cloudnative-pg.io
+sources:
+  - https://github.com/cloudnative-pg/cloudnative-pg
+maintainers:
+  - name: FeLiNa22
