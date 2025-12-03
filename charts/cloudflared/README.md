@@ -17,7 +17,7 @@ Cloudflare Tunnel provides you with a secure way to connect your resources to Cl
 
 - Kubernetes 1.12+
 - Helm 3.2.0+
-- Argo Tunnel ID generated
+- Cloudflare Tunnel ID generated
 
 ## Installing the Chart
 
@@ -68,11 +68,11 @@ The command removes all the Kubernetes components associated with the chart and 
 | `managed.token`                                 | The connector token provided at the end of the CF Zero Trust tunnel creation.                                                                 | `""`        |
 | `managed.existingSecret`                        | The name of the existing secret containing the token. The secret key must be set to 'cf-tunnel-token'.                                        | `""`        |
 | `local.enabled`                                 | Whether to enable Local (CLI) tunnel configuration. Cannot coexist with the managed one.                                                      | `false`     |
-| `local.auth.tunnelID`                           | The Argo Tunnel ID you created. Check the configuration section for details.                                                                  | `""`        |
-| `local.auth.accountTag`                         | The Argo tunnel account tag.                                                                                                                  | `""`        |
-| `local.auth.tunnelName`                         | The Argo tunnel name.                                                                                                                         | `""`        |
-| `local.auth.tunnelSecret`                       | The Argo tunnel secret.                                                                                                                       | `""`        |
-| `local.auth.existingSecret`                     | The name of an existing secret containing the Argo tunnel settings.                                                                           | `""`        |
+| `local.auth.tunnelID`                           | The Cloudflare Tunnel ID you created. Check the configuration section for details.                                                            | `""`        |
+| `local.auth.accountTag`                         | The Cloudflare tunnel account tag.                                                                                                            | `""`        |
+| `local.auth.tunnelName`                         | The Cloudflare tunnel name.                                                                                                                   | `""`        |
+| `local.auth.tunnelSecret`                       | The Cloudflare tunnel secret.                                                                                                                 | `""`        |
+| `local.auth.existingSecret`                     | The name of an existing secret containing the Cloudflare tunnel settings.                                                                     | `""`        |
 | `local.warpRouting`                             | Whether to enable WARP traffic routing to local subnets.                                                                                      | `false`     |
 | `local.ingress`                                 | The ingress settings to apply. Check the configuration section for examples.                                                                  | `[]`        |
 | `autoscaling.enabled`                           | Enable autoscaling for the deployment                                                                                                         | `false`     |
@@ -110,7 +110,7 @@ helm install example -f values.yaml kubitodev/example
 
 ### Local CLI Setup
 
-#### Getting the Argo Tunnel ID
+#### Getting the Cloudflare Tunnel ID
 
 - Start by downloading and installing the lightweight Cloudflare Tunnel daemon, `cloudflared`. You can find it [here](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/installation/).
 
@@ -138,7 +138,7 @@ Now, when you want to create a new subdomain, just point it as a CNAME to the tu
 
 For more information, check the [official guide](https://developers.cloudflare.com/cloudflare-one/tutorials/many-cfd-one-tunnel/).
 
-#### Setting up the Argo Tunnel ingress options with Traefik
+#### Setting up the Cloudflare Tunnel ingress options with Traefik
 
 To use the tunnel with Traefik, you need to configure the ingress settings. As cloudflared works with CNAMEs, you want to set a wildcard hostname for the service, and set the origin request setting to be the root domain that you are configuring this for. Also, you need to point the service to the secure port (443) of the Traefik load balancer service. Here is an example configuration:
 

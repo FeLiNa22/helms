@@ -15,7 +15,7 @@ jellyfin:
       traefik.ingress.kubernetes.io/router.tls: "true"
       traefik.ingress.kubernetes.io/router.tls.certresolver: "letsencrypt"
     hosts:
-      - jellyfin.example.com
+      - jellyfin.raulpatel.com
   persistence:
     config:
       enabled: true
@@ -41,7 +41,7 @@ sonarr:
       traefik.ingress.kubernetes.io/router.tls: "true"
       traefik.ingress.kubernetes.io/router.tls.certresolver: "letsencrypt"
     hosts:
-      - host: sonarr.example.com
+      - host: sonarr.raulpatel.com
         paths:
           - path: /
             pathType: ImplementationSpecific
@@ -65,7 +65,7 @@ radarr:
       traefik.ingress.kubernetes.io/router.tls: "true"
       traefik.ingress.kubernetes.io/router.tls.certresolver: "letsencrypt"
     hosts:
-      - host: radarr.example.com
+      - host: radarr.raulpatel.com
         paths:
           - path: /
             pathType: ImplementationSpecific
@@ -89,7 +89,7 @@ lidarr:
       traefik.ingress.kubernetes.io/router.tls: "true"
       traefik.ingress.kubernetes.io/router.tls.certresolver: "letsencrypt"
     hosts:
-      - host: lidarr.example.com
+      - host: lidarr.raulpatel.com
         paths:
           - path: /
             pathType: ImplementationSpecific
@@ -113,7 +113,7 @@ prowlarr:
       traefik.ingress.kubernetes.io/router.tls: "true"
       traefik.ingress.kubernetes.io/router.tls.certresolver: "letsencrypt"
     hosts:
-      - host: prowlarr.example.com
+      - host: prowlarr.raulpatel.com
         paths:
           - path: /
             pathType: ImplementationSpecific
@@ -137,7 +137,7 @@ bazarr:
       traefik.ingress.kubernetes.io/router.tls: "true"
       traefik.ingress.kubernetes.io/router.tls.certresolver: "letsencrypt"
     hosts:
-      - host: bazarr.example.com
+      - host: bazarr.raulpatel.com
         paths:
           - path: /
             pathType: ImplementationSpecific
@@ -165,7 +165,7 @@ qbittorrent:
       traefik.ingress.kubernetes.io/router.tls: "true"
       traefik.ingress.kubernetes.io/router.tls.certresolver: "letsencrypt"
     hosts:
-      - host: qbittorrent.example.com
+      - host: qbittorrent.raulpatel.com
         paths:
           - path: /
             pathType: ImplementationSpecific
@@ -189,7 +189,7 @@ jellyseerr:
       traefik.ingress.kubernetes.io/router.tls: "true"
       traefik.ingress.kubernetes.io/router.tls.certresolver: "letsencrypt"
     hosts:
-      - host: jellyseerr.example.com
+      - host: jellyseerr.raulpatel.com
         paths:
           - path: /
             pathType: ImplementationSpecific
@@ -213,7 +213,7 @@ flaresolverr:
       traefik.ingress.kubernetes.io/router.tls: "true"
       traefik.ingress.kubernetes.io/router.tls.certresolver: "letsencrypt"
     hosts:
-      - host: flaresolverr.example.com
+      - host: flaresolverr.raulpatel.com
         paths:
           - path: /
             pathType: ImplementationSpecific
@@ -233,7 +233,7 @@ plex:
       traefik.ingress.kubernetes.io/router.tls: "true"
       traefik.ingress.kubernetes.io/router.tls.certresolver: "letsencrypt"
     hosts:
-      - host: plex.example.com
+      - host: plex.raulpatel.com
         paths:
           - path: /
             pathType: ImplementationSpecific
@@ -257,7 +257,7 @@ emby:
       traefik.ingress.kubernetes.io/router.tls: "true"
       traefik.ingress.kubernetes.io/router.tls.certresolver: "letsencrypt"
     hosts:
-      - host: emby.example.com
+      - host: emby.raulpatel.com
         paths:
           - path: /
             pathType: ImplementationSpecific
@@ -281,7 +281,7 @@ sabnzbd:
       traefik.ingress.kubernetes.io/router.tls: "true"
       traefik.ingress.kubernetes.io/router.tls.certresolver: "letsencrypt"
     hosts:
-      - host: sabnzbd.example.com
+      - host: sabnzbd.raulpatel.com
         paths:
           - path: /
             pathType: ImplementationSpecific
@@ -305,7 +305,7 @@ cleanuparr:
       traefik.ingress.kubernetes.io/router.tls: "true"
       traefik.ingress.kubernetes.io/router.tls.certresolver: "letsencrypt"
     hosts:
-      - host: cleanuparr.example.com
+      - host: cleanuparr.raulpatel.com
         paths:
           - path: /
             pathType: ImplementationSpecific

@@ -53,11 +53,11 @@ managed:
   existingSecret: ""
 
 ## @param local.enabled Whether to enable Local (CLI) tunnel configuration. Cannot coexist with the managed one.
-## @param local.auth.tunnelID The Argo Tunnel ID you created. Check the configuration section for details.
-## @param local.auth.accountTag The Argo tunnel account tag.
-## @param local.auth.tunnelName The Argo tunnel name.
-## @param local.auth.tunnelSecret The Argo tunnel secret.
-## @param local.auth.existingSecret The name of an existing secret containing the Argo tunnel settings.
+## @param local.auth.tunnelID The Cloudflare Tunnel ID you created. Check the configuration section for details.
+## @param local.auth.accountTag The Cloudflare tunnel account tag.
+## @param local.auth.tunnelName The Cloudflare tunnel name.
+## @param local.auth.tunnelSecret The Cloudflare tunnel secret.
+## @param local.auth.existingSecret The name of an existing secret containing the Cloudflare tunnel settings.
 ## @param local.warpRouting Whether to enable WARP traffic routing to local subnets.
 ## @param local.ingress The ingress settings to apply. Check the configuration section for examples.
 ##
