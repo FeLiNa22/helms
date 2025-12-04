@@ -4,25 +4,18 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}-jellyfin
   labels:
-    app.kubernetes.io/name: jellyfin
-    app.kubernetes.io/instance: {{ .Release.Name | quote }}
-    app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+    {{- include "servarr.labels" (dict "context" . "appName" "jellyfin") | nindent 4 }}
 spec:
   strategy:
     type: Recreate
   replicas: {{ .Values.jellyfin.replicaCount }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: jellyfin
-      app.kubernetes.io/instance: {{ .Release.Name | quote }}
+      {{- include "servarr.selectorLabels" (dict "context" . "appName" "jellyfin") | nindent 6 }}
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: jellyfin
-        app.kubernetes.io/instance: {{ .Release.Name | quote }}
-        app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-        app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+        {{- include "servarr.labels" (dict "context" . "appName" "jellyfin") | nindent 8 }}
     spec:
     {{- if .Values.jellyfin.enableDLNA }}
       hostNetwork: true

@@ -4,11 +4,7 @@ kind: Service
 metadata:
   name: {{ .Release.Name }}-radarr
   labels:
-    app.kubernetes.io/name: radarr
-    app.kubernetes.io/instance: {{ .Release.Name | quote }}
-    app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
-    app.kubernetes.io/part-of: {{ .Release.Name | quote}}
+    {{- include "servarr.labels" (dict "context" . "appName" "radarr") | nindent 4 }}
 spec:
   type: {{ .Values.radarr.service.type | default "ClusterIP" }}
   ports:
@@ -20,6 +16,5 @@ spec:
       nodePort: {{.Values.radarr.service.nodePort}}
 {{ end }}
   selector:
-    app.kubernetes.io/name: radarr
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    {{- include "servarr.selectorLabels" (dict "context" . "appName" "radarr") | nindent 4 }}
 {{- end }}

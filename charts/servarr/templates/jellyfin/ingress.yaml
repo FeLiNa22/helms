@@ -4,10 +4,7 @@ kind: Ingress
 metadata:
   name: {{ .Release.Name }}-jellyfin
   labels:
-    app.kubernetes.io/name: jellyfin
-    app.kubernetes.io/instance: {{ .Release.Name | quote }}
-    app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+    {{- include "servarr.labels" (dict "context" . "appName" "jellyfin") | nindent 4 }}
     {{- with .Values.jellyfin.ingress.labels }}
     {{- toYaml . | nindent 4 }}
     {{- end }}

@@ -17,10 +17,7 @@ kind: Ingress
 metadata:
   name: {{ $fullName }}
   labels:
-    app.kubernetes.io/name: jellyseerr
-    app.kubernetes.io/instance: {{ .Release.Name | quote }}
-    app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+    {{- include "servarr.labels" (dict "context" . "appName" "jellyseerr") | nindent 4 }}
   {{- with .Values.jellyseerr.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}

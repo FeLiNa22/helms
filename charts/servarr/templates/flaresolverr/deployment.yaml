@@ -4,10 +4,7 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}-flaresolverr
   labels:
-    app.kubernetes.io/name: flaresolverr
-    app.kubernetes.io/instance: {{ .Release.Name | quote }}
-    app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+    {{- include "servarr.labels" (dict "context" . "appName" "flaresolverr") | nindent 4 }}
 spec:
   {{- if not .Values.flaresolverr.autoscaling.enabled }}
   replicas: {{ .Values.flaresolverr.replicaCount }}
@@ -16,8 +13,7 @@ spec:
     {{- .Values.flaresolverr.deployment.strategy | toYaml | nindent 4 }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: flaresolverr
-      app.kubernetes.io/instance: {{ .Release.Name }}
+      {{- include "servarr.selectorLabels" (dict "context" . "appName" "flaresolverr") | nindent 6 }}
   template:
     metadata:
       {{- with .Values.flaresolverr.podAnnotations }}
@@ -25,10 +21,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        app.kubernetes.io/name: flaresolverr
-        app.kubernetes.io/instance: {{ .Release.Name | quote }}
-        app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-        app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+        {{- include "servarr.labels" (dict "context" . "appName" "flaresolverr") | nindent 8 }}
     spec:
       {{- with .Values.flaresolverr.imagePullSecrets }}
       imagePullSecrets:

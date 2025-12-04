@@ -4,10 +4,7 @@ kind: Service
 metadata:
   name: {{ .Release.Name }}-bazarr
   labels:
-    app.kubernetes.io/name: bazarr
-    app.kubernetes.io/instance: {{ .Release.Name | quote }}
-    app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+    {{- include "servarr.labels" (dict "context" . "appName" "bazarr") | nindent 4 }}
 spec:
   type: {{ .Values.bazarr.service.type | default "ClusterIP" }}
   ports:
@@ -19,6 +16,5 @@ spec:
       nodePort: {{.Values.bazarr.service.nodePort}}
 {{ end }}
   selector:
-    app.kubernetes.io/name: bazarr
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    {{- include "servarr.selectorLabels" (dict "context" . "appName" "bazarr") | nindent 4 }}
 {{- end }}

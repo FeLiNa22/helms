@@ -5,9 +5,10 @@ metadata:
   name: {{ .Release.Name }}-jellyfin
   labels:
     app.kubernetes.io/name: jellyfin
-    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}-jellyfin
     app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
     app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+    app.kubernetes.io/part-of: {{ .Release.Name | quote }}
 {{- if .Values.jellyfin.service.labels }}
 {{ toYaml .Values.jellyfin.service.labels | indent 4 }}
 {{- end }}
@@ -49,6 +50,5 @@ spec:
       nodePort: {{.Values.jellyfin.service.nodePort}}
 {{ end }}
   selector:
-    app.kubernetes.io/name: jellyfin
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    {{- include "servarr.selectorLabels" (dict "context" . "appName" "jellyfin") | nindent 4 }}
 {{- end }}

@@ -4,10 +4,7 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: {{ .Release.Name }}-cleanuparr
   labels:
-    app.kubernetes.io/name: cleanuparr
-    app.kubernetes.io/instance: {{ .Release.Name | quote }}
-    app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+    {{- include "servarr.labels" (dict "context" . "appName" "cleanuparr") | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1

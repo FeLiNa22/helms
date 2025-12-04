@@ -4,10 +4,7 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}-plex
   labels:
-    app.kubernetes.io/name: plex
-    app.kubernetes.io/instance: {{ .Release.Name | quote }}
-    app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+    {{- include "servarr.labels" (dict "context" . "appName" "plex") | nindent 4 }}
 spec:
   {{- if not .Values.plex.autoscaling.enabled }}
   replicas: {{ .Values.plex.replicaCount }}
@@ -16,8 +13,7 @@ spec:
     {{- .Values.plex.deployment.strategy | toYaml | nindent 4 }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: plex
-      app.kubernetes.io/instance: {{ .Release.Name }}
+      {{- include "servarr.selectorLabels" (dict "context" . "appName" "plex") | nindent 6 }}
   template:
     metadata:
       {{- with .Values.plex.podAnnotations }}
@@ -25,10 +21,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        app.kubernetes.io/name: plex
-        app.kubernetes.io/instance: {{ .Release.Name | quote }}
-        app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-        app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+        {{- include "servarr.labels" (dict "context" . "appName" "plex") | nindent 8 }}
     spec:
       {{- with .Values.plex.imagePullSecrets }}
       imagePullSecrets:
