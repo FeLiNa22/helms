@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}-lidarr
   labels:
-    {{- include "servarr.labels" (dict "context" . "appName" "lidarr") | nindent 4 }}
+    {{- call "servarr.labels" "lidarr" | nindent 4 }}
 spec:
   {{- if not .Values.lidarr.autoscaling.enabled }}
   replicas: {{ .Values.lidarr.replicaCount }}
@@ -13,7 +13,7 @@ spec:
     {{- .Values.lidarr.deployment.strategy | toYaml | nindent 4 }}
   selector:
     matchLabels:
-      {{- include "servarr.selectorLabels" (dict "context" . "appName" "lidarr") | nindent 6 }}
+      {{- call "servarr.selectorLabels" "lidarr" | nindent 6 }}
   template:
     metadata:
       {{- with .Values.lidarr.podAnnotations }}
@@ -21,7 +21,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "servarr.labels" (dict "context" . "appName" "lidarr") | nindent 8 }}
+        {{- call "servarr.labels" "lidarr" | nindent 8 }}
     spec:
       {{- with .Values.lidarr.imagePullSecrets }}
       imagePullSecrets:

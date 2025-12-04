@@ -4,7 +4,7 @@ kind: Service
 metadata:
   name: {{ .Release.Name }}-sonarr
   labels:
-    {{- include "servarr.labels" (dict "context" . "appName" "sonarr") | nindent 4 }}
+    {{- call "servarr.labels" "sonarr" | nindent 4 }}
 spec:
   type: {{ .Values.sonarr.service.type | default "ClusterIP" }}
   ports:
@@ -16,5 +16,5 @@ spec:
       nodePort: {{.Values.sonarr.service.nodePort}}
 {{ end }}
   selector:
-    {{- include "servarr.selectorLabels" (dict "context" . "appName" "sonarr") | nindent 4 }}
+    {{- call "servarr.selectorLabels" "sonarr" | nindent 4 }}
 {{- end }}

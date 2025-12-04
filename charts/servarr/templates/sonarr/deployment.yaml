@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}-sonarr
   labels:
-    {{- include "servarr.labels" (dict "context" . "appName" "sonarr") | nindent 4 }}
+    {{- call "servarr.labels" "sonarr" | nindent 4 }}
 spec:
   {{- if not .Values.sonarr.autoscaling.enabled }}
   replicas: {{ .Values.sonarr.replicaCount }}
@@ -13,7 +13,7 @@ spec:
     {{- .Values.sonarr.deployment.strategy | toYaml | nindent 4 }}
   selector:
     matchLabels:
-      {{- include "servarr.selectorLabels" (dict "context" . "appName" "sonarr") | nindent 6 }}
+      {{- call "servarr.selectorLabels" "sonarr" | nindent 6 }}
   template:
     metadata:
       {{- with .Values.sonarr.podAnnotations }}
@@ -21,7 +21,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "servarr.labels" (dict "context" . "appName" "sonarr") | nindent 8 }}
+        {{- call "servarr.labels" "sonarr" | nindent 8 }}
     spec:
       {{- with .Values.sonarr.imagePullSecrets }}
       imagePullSecrets:

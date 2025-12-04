@@ -4,7 +4,7 @@ kind: Service
 metadata:
   name: {{ .Release.Name }}-prowlarr
   labels:
-    {{- include "servarr.labels" (dict "context" . "appName" "prowlarr") | nindent 4 }}
+    {{- call "servarr.labels" "prowlarr" | nindent 4 }}
 spec:
   type: {{ .Values.prowlarr.service.type | default "ClusterIP" }}
   ports:
@@ -16,5 +16,5 @@ spec:
       nodePort: {{.Values.prowlarr.service.nodePort}}
 {{ end }}
   selector:
-    {{- include "servarr.selectorLabels" (dict "context" . "appName" "prowlarr") | nindent 4 }}
+    {{- call "servarr.selectorLabels" "prowlarr" | nindent 4 }}
 {{- end }}

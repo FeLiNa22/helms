@@ -17,7 +17,7 @@ kind: Ingress
 metadata:
   name: {{ $fullName }}
   labels:
-    {{- include "servarr.labels" (dict "context" . "appName" "cleanuparr") | nindent 4 }}
+    {{- call "servarr.labels" "cleanuparr" | nindent 4 }}
   {{- with .Values.cleanuparr.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}

@@ -4,7 +4,7 @@ kind: Service
 metadata:
   name: {{ .Release.Name }}-sabnzbd
   labels:
-    {{- include "servarr.labels" (dict "context" . "appName" "sabnzbd") | nindent 4 }}
+    {{- call "servarr.labels" "sabnzbd" | nindent 4 }}
 spec:
   type: {{ .Values.sabnzbd.service.type | default "ClusterIP" }}
   ports:
@@ -16,5 +16,5 @@ spec:
       nodePort: {{.Values.sabnzbd.service.nodePort}}
 {{ end }}
   selector:
-    {{- include "servarr.selectorLabels" (dict "context" . "appName" "sabnzbd") | nindent 4 }}
+    {{- call "servarr.selectorLabels" "sabnzbd" | nindent 4 }}
 {{- end }}

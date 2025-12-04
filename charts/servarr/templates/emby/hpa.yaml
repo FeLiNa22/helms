@@ -4,7 +4,7 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: {{ .Release.Name }}-emby
   labels:
-    {{- include "servarr.labels" (dict "context" . "appName" "emby") | nindent 4 }}
+    {{- call "servarr.labels" "emby" | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1

@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}-qbittorrent
   labels:
-    {{- include "servarr.labels" (dict "context" . "appName" "qbittorrent") | nindent 4 }}
+    {{- call "servarr.labels" "qbittorrent" | nindent 4 }}
 spec:
   {{- if not .Values.qbittorrent.autoscaling.enabled }}
   replicas: {{ .Values.qbittorrent.replicaCount }}
@@ -13,7 +13,7 @@ spec:
     {{- .Values.qbittorrent.deployment.strategy | toYaml | nindent 4 }}
   selector:
     matchLabels:
-      {{- include "servarr.selectorLabels" (dict "context" . "appName" "qbittorrent") | nindent 6 }}
+      {{- call "servarr.selectorLabels" "qbittorrent" | nindent 6 }}
   template:
     metadata:
       {{- with .Values.qbittorrent.podAnnotations }}
@@ -21,7 +21,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "servarr.labels" (dict "context" . "appName" "qbittorrent") | nindent 8 }}
+        {{- call "servarr.labels" "qbittorrent" | nindent 8 }}
     spec:
       {{- with .Values.qbittorrent.imagePullSecrets }}
       imagePullSecrets:

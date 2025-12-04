@@ -4,7 +4,7 @@ kind: Service
 metadata:
   name: {{ .Release.Name }}-jellyseerr
   labels:
-    {{- include "servarr.labels" (dict "context" . "appName" "jellyseerr") | nindent 4 }}
+    {{- call "servarr.labels" "jellyseerr" | nindent 4 }}
 spec:
   type: {{ .Values.jellyseerr.service.type | default "ClusterIP" }}
   ports:
@@ -16,5 +16,5 @@ spec:
       nodePort: {{.Values.jellyseerr.service.nodePort}}
 {{ end }}
   selector:
-    {{- include "servarr.selectorLabels" (dict "context" . "appName" "jellyseerr") | nindent 4 }}
+    {{- call "servarr.selectorLabels" "jellyseerr" | nindent 4 }}
 {{- end }}

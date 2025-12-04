@@ -4,7 +4,7 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: {{ .Release.Name }}-cleanuparr
   labels:
-    {{- include "servarr.labels" (dict "context" . "appName" "cleanuparr") | nindent 4 }}
+    {{- call "servarr.labels" "cleanuparr" | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1

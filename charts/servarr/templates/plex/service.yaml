@@ -4,7 +4,7 @@ kind: Service
 metadata:
   name: {{ .Release.Name }}-plex
   labels:
-    {{- include "servarr.labels" (dict "context" . "appName" "plex") | nindent 4 }}
+    {{- call "servarr.labels" "plex" | nindent 4 }}
 spec:
   type: {{ .Values.plex.service.type | default "ClusterIP" }}
   ports:
@@ -16,5 +16,5 @@ spec:
       nodePort: {{.Values.plex.service.nodePort}}
 {{ end }}
   selector:
-    {{- include "servarr.selectorLabels" (dict "context" . "appName" "plex") | nindent 4 }}
+    {{- call "servarr.selectorLabels" "plex" | nindent 4 }}
 {{- end }}

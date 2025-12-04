@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}-prowlarr
   labels:
-    {{- include "servarr.labels" (dict "context" . "appName" "prowlarr") | nindent 4 }}
+    {{- call "servarr.labels" "prowlarr" | nindent 4 }}
 spec:
   {{- if not .Values.prowlarr.autoscaling.enabled }}
   replicas: {{ .Values.prowlarr.replicaCount }}
@@ -13,7 +13,7 @@ spec:
     {{- .Values.prowlarr.deployment.strategy | toYaml | nindent 4 }}
   selector:
     matchLabels:
-      {{- include "servarr.selectorLabels" (dict "context" . "appName" "prowlarr") | nindent 6 }}
+      {{- call "servarr.selectorLabels" "prowlarr" | nindent 6 }}
   template:
     metadata:
       {{- with .Values.prowlarr.podAnnotations }}
@@ -21,7 +21,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "servarr.labels" (dict "context" . "appName" "prowlarr") | nindent 8 }}
+        {{- call "servarr.labels" "prowlarr" | nindent 8 }}
     spec:
       {{- with .Values.prowlarr.imagePullSecrets }}
       imagePullSecrets:

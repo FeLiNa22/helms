@@ -4,7 +4,7 @@ kind: Service
 metadata:
   name: {{ .Release.Name }}-bazarr
   labels:
-    {{- include "servarr.labels" (dict "context" . "appName" "bazarr") | nindent 4 }}
+    {{- call "servarr.labels" "bazarr" | nindent 4 }}
 spec:
   type: {{ .Values.bazarr.service.type | default "ClusterIP" }}
   ports:
@@ -16,5 +16,5 @@ spec:
       nodePort: {{.Values.bazarr.service.nodePort}}
 {{ end }}
   selector:
-    {{- include "servarr.selectorLabels" (dict "context" . "appName" "bazarr") | nindent 4 }}
+    {{- call "servarr.selectorLabels" "bazarr" | nindent 4 }}
 {{- end }}

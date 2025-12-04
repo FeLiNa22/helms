@@ -4,18 +4,18 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}-jellyfin
   labels:
-    {{- include "servarr.labels" (dict "context" . "appName" "jellyfin") | nindent 4 }}
+    {{- call "servarr.labels" "jellyfin" | nindent 4 }}
 spec:
   strategy:
     type: Recreate
   replicas: {{ .Values.jellyfin.replicaCount }}
   selector:
     matchLabels:
-      {{- include "servarr.selectorLabels" (dict "context" . "appName" "jellyfin") | nindent 6 }}
+      {{- call "servarr.selectorLabels" "jellyfin" | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "servarr.labels" (dict "context" . "appName" "jellyfin") | nindent 8 }}
+        {{- call "servarr.labels" "jellyfin" | nindent 8 }}
     spec:
     {{- if .Values.jellyfin.enableDLNA }}
       hostNetwork: true

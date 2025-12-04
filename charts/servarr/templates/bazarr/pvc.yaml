@@ -4,7 +4,7 @@ apiVersion: v1
 metadata:
   name: {{ .Release.Name }}-bazarr
   labels:
-    {{- include "servarr.labels" (dict "context" . "appName" "bazarr") | nindent 4 }}
+    {{- call "servarr.labels" "bazarr" | nindent 4 }}
   {{- if .Values.bazarr.persistence.annotations }}
   annotations:
     {{- toYaml .Values.bazarr.persistence.annotations | nindent 4 }}

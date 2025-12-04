@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}-jellyseerr
   labels:
-    {{- include "servarr.labels" (dict "context" . "appName" "jellyseerr") | nindent 4 }}
+    {{- call "servarr.labels" "jellyseerr" | nindent 4 }}
 spec:
   {{- if not .Values.jellyseerr.autoscaling.enabled }}
   replicas: {{ .Values.jellyseerr.replicaCount }}
@@ -13,7 +13,7 @@ spec:
     {{- .Values.jellyseerr.deployment.strategy | toYaml | nindent 4 }}
   selector:
     matchLabels:
-      {{- include "servarr.selectorLabels" (dict "context" . "appName" "jellyseerr") | nindent 6 }}
+      {{- call "servarr.selectorLabels" "jellyseerr" | nindent 6 }}
   template:
     metadata:
       {{- with .Values.jellyseerr.podAnnotations }}
@@ -21,7 +21,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "servarr.labels" (dict "context" . "appName" "jellyseerr") | nindent 8 }}
+        {{- call "servarr.labels" "jellyseerr" | nindent 8 }}
     spec:
       {{- with .Values.jellyseerr.imagePullSecrets }}
       imagePullSecrets:

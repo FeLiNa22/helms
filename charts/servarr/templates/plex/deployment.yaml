@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}-plex
   labels:
-    {{- include "servarr.labels" (dict "context" . "appName" "plex") | nindent 4 }}
+    {{- call "servarr.labels" "plex" | nindent 4 }}
 spec:
   {{- if not .Values.plex.autoscaling.enabled }}
   replicas: {{ .Values.plex.replicaCount }}
@@ -13,7 +13,7 @@ spec:
     {{- .Values.plex.deployment.strategy | toYaml | nindent 4 }}
   selector:
     matchLabels:
-      {{- include "servarr.selectorLabels" (dict "context" . "appName" "plex") | nindent 6 }}
+      {{- call "servarr.selectorLabels" "plex" | nindent 6 }}
   template:
     metadata:
       {{- with .Values.plex.podAnnotations }}
@@ -21,7 +21,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "servarr.labels" (dict "context" . "appName" "plex") | nindent 8 }}
+        {{- call "servarr.labels" "plex" | nindent 8 }}
     spec:
       {{- with .Values.plex.imagePullSecrets }}
       imagePullSecrets:

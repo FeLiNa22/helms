@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}-cleanuparr
   labels:
-    {{- include "servarr.labels" (dict "context" . "appName" "cleanuparr") | nindent 4 }}
+    {{- call "servarr.labels" "cleanuparr" | nindent 4 }}
 spec:
   {{- if not .Values.cleanuparr.autoscaling.enabled }}
   replicas: {{ .Values.cleanuparr.replicaCount }}
@@ -13,7 +13,7 @@ spec:
     {{- .Values.cleanuparr.deployment.strategy | toYaml | nindent 4 }}
   selector:
     matchLabels:
-      {{- include "servarr.selectorLabels" (dict "context" . "appName" "cleanuparr") | nindent 6 }}
+      {{- call "servarr.selectorLabels" "cleanuparr" | nindent 6 }}
   template:
     metadata:
       {{- with .Values.cleanuparr.podAnnotations }}
@@ -21,7 +21,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "servarr.labels" (dict "context" . "appName" "cleanuparr") | nindent 8 }}
+        {{- call "servarr.labels" "cleanuparr" | nindent 8 }}
     spec:
       {{- with .Values.cleanuparr.imagePullSecrets }}
       imagePullSecrets:
