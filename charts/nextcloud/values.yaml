@@ -127,6 +127,43 @@ env:
   NEXTCLOUD_ADMIN_USER: "admin"
   NEXTCLOUD_ADMIN_PASSWORD: "admin"
   NEXTCLOUD_TRUSTED_DOMAINS: "localhost"
+  # Database connection will be configured via secrets when database.enabled=true
+  # Otherwise, configure these manually:
+  # POSTGRES_HOST: "nextcloud-postgresql"
+  # POSTGRES_USER: "nextcloud"
+  # POSTGRES_PASSWORD: "nextcloud"
+  # POSTGRES_DB: "nextcloud"
+
+# Database configuration using CloudNativePG
+database:
+  enabled: true
+  # Name of the database cluster (will be suffixed with release name)
+  name: nextcloud-db
+  # Number of PostgreSQL instances (replicas)
+  instances: 1
+  # PostgreSQL image
+  image:
+    repository: ghcr.io/cloudnative-pg/postgresql
+    tag: "16.6"
+  # Database configuration
+  database: nextcloud
+  owner: nextcloud
+  # Storage configuration
+  storage:
+    size: 10Gi
+    storageClass: ""
+  # Secret configuration
+  secret:
+    name: ""  # Leave empty to auto-generate
+    create: true
+    username: nextcloud
+    password: ""  # Leave empty to auto-generate
+  # Superuser secret
+  superuserSecret:
+    name: ""  # Leave empty to auto-generate
+    create: true
+    username: postgres
+    password: ""  # Leave empty to auto-generate
 
 persistence:
   enabled: true
