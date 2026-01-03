@@ -222,6 +222,9 @@ The command removes all the Kubernetes components associated with the chart and 
 | `qbittorrent.persistence.size`                              | The size to use for the persistence.                                                                                                | `800Mi`                           |
 | `qbittorrent.persistence.additionalVolumes`                 | Additional volumes to add to the pod.                                                                                               | `[]`                              |
 | `qbittorrent.persistence.additionalMounts`                  | Additional volume mounts to add to the pod.                                                                                         | `[]`                              |
+| `qbittorrent.localStorage.enabled`                          | Whether to enable local storage for temporary files and downloads.                                                                  | `false`                           |
+| `qbittorrent.localStorage.mountPath`                        | The mount path for the local storage.                                                                                               | `/local-storage`                  |
+| `qbittorrent.localStorage.size`                             | The size limit for the temporary storage (emptyDir).                                                                                | `1Gi`                             |
 
 ### Prowlarr parameters
 
@@ -607,6 +610,9 @@ The command removes all the Kubernetes components associated with the chart and 
 | `sabnzbd.persistence.size`                                 | The size to use for the persistence.                                                                                                | `800Mi`                        |
 | `sabnzbd.persistence.additionalVolumes`                    | Additional volumes to add to the pod.                                                                                               | `[]`                           |
 | `sabnzbd.persistence.additionalMounts`                     | Additional volume mounts to add to the pod.                                                                                         | `[]`                           |
+| `sabnzbd.localStorage.enabled`                             | Whether to enable local storage for temporary files and downloads.                                                                  | `false`                        |
+| `sabnzbd.localStorage.mountPath`                           | The mount path for the local storage.                                                                                               | `/local-storage`               |
+| `sabnzbd.localStorage.size`                                | The size limit for the temporary storage (emptyDir).                                                                                | `1Gi`                          |
 
 ### Plex parameters
 
@@ -801,6 +807,34 @@ jellyfin:
       size: 100Gi
       accessMode: ReadWriteOnce
 ```
+
+### Local storage for temporary files and downloads
+
+Services like SABnzbd and qBittorrent can benefit from local storage for temporary files, incomplete downloads, and caching. This feature creates an emptyDir volume with a configurable size limit for temporary storage needs.
+
+#### Example: Enabling temporary storage for SABnzbd
+
+```yaml
+sabnzbd:
+  enabled: true
+  localStorage:
+    enabled: true
+    mountPath: /local-storage
+    size: 5Gi
+```
+
+#### Example: Enabling temporary storage for qBittorrent
+
+```yaml
+qbittorrent:
+  enabled: true
+  localStorage:
+    enabled: true
+    mountPath: /incomplete-downloads
+    size: 10Gi
+```
+
+**Note**: The localStorage uses an emptyDir volume type, which provides a temporary directory that persists for the lifetime of the pod. When the pod is deleted or restarted, the data in this directory is lost. The `size` parameter sets the maximum size limit for the temporary storage.
 
 ### Intro Skipper plugin for Jellyfin permissions fix
 

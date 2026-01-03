@@ -381,6 +381,9 @@ sonarr:
 ## @param qbittorrent.persistence.size The size to use for the persistence.
 ## @param qbittorrent.persistence.additionalVolumes Additional volumes to add to the pod.
 ## @param qbittorrent.persistence.additionalMounts Additional volume mounts to add to the pod.
+## @param qbittorrent.localStorage.enabled Whether to enable local storage for temporary files and downloads.
+## @param qbittorrent.localStorage.mountPath The mount path for the local storage.
+## @param qbittorrent.localStorage.size The size limit for the temporary storage (emptyDir).
 ##
 qbittorrent:
   enabled: true
@@ -480,6 +483,11 @@ qbittorrent:
     size: 800Mi
     additionalVolumes: []
     additionalMounts: []
+
+  localStorage:
+    enabled: false
+    mountPath: /local-storage
+    size: 1Gi
 
 ## @section Prowlarr parameters
 
@@ -1502,6 +1510,9 @@ cleanuparr:
 ## @param sabnzbd.persistence.size The size to use for the persistence.
 ## @param sabnzbd.persistence.additionalVolumes Additional volumes to add to the pod.
 ## @param sabnzbd.persistence.additionalMounts Additional volume mounts to add to the pod.
+## @param sabnzbd.localStorage.enabled Whether to enable local storage for temporary files and downloads.
+## @param sabnzbd.localStorage.mountPath The mount path for the local storage.
+## @param sabnzbd.localStorage.size The size limit for the temporary storage (emptyDir).
 ##
 sabnzbd:
   enabled: false
@@ -1596,6 +1607,11 @@ sabnzbd:
     size: 800Mi
     additionalVolumes: []
     additionalMounts: []
+
+  localStorage:
+    enabled: false
+    mountPath: /local-storage
+    size: 1Gi
 
 ## @section Plex parameters
 
